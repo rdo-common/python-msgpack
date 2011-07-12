@@ -1,0 +1,12 @@
+diff -up msgpack-python-0.1.9/msgpack/pack_template.h.endian msgpack-python-0.1.9/msgpack/pack_template.h
+--- msgpack-python-0.1.9/msgpack/pack_template.h.endian	2011-07-12 14:37:47.000000000 +0200
++++ msgpack-python-0.1.9/msgpack/pack_template.h	2011-07-12 14:38:10.000000000 +0200
+@@ -21,7 +21,7 @@
+ #define TAKE8_16(d) ((uint8_t*)&d)[0]
+ #define TAKE8_32(d) ((uint8_t*)&d)[0]
+ #define TAKE8_64(d) ((uint8_t*)&d)[0]
+-#elif __BIG_ENDIAN__
++#else /* __BIG_ENDIAN__ */
+ #define TAKE8_8(d)  ((uint8_t*)&d)[0]
+ #define TAKE8_16(d) ((uint8_t*)&d)[1]
+ #define TAKE8_32(d) ((uint8_t*)&d)[3]

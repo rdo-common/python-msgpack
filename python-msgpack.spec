@@ -6,13 +6,14 @@
 
 Name:           python-%{srcname}
 Version:        0.1.9
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 Group:          Development/Languages
 License:        ASL 2.0
 URL:            http://pypi.python.org/pypi/msgpack-python/
 Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
+Patch0:         msgpack-python-0.1.9-endian.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 
@@ -35,6 +36,7 @@ This is a Python (de)serializer for MessagePack.
 
 %prep
 %setup -q -n %{srcname}-python-%{version}
+%patch0 -p1 -b .endian
 
 
 %build
@@ -62,6 +64,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jul 12 2011 Dan Horák <dan[at]danny.cz> - 0.1.9-3
+- fix build on big endian arches
+
 * Fri Jun 24 2011 Fabian Affolter <fabian@bernewireless.net> - 0.1.9-2
 - Tests are failing, they are not active at the moment
 - Filtering added
