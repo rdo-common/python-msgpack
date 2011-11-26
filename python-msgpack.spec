@@ -5,8 +5,8 @@
 %global srcname msgpack
 
 Name:           python-%{srcname}
-Version:        0.1.9
-Release:        3%{?dist}
+Version:        0.1.10
+Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 Group:          Development/Languages
@@ -58,18 +58,22 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README
+%doc COPYING
 %{python_sitearch}/%{srcname}/
 %{python_sitearch}/%{srcname}*.egg-info
 
 
 %changelog
+* Sat Nov 26 2011 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.10-1
+- Updated to new upstream version 0.1.10
+- README is gone
+
 * Tue Jul 12 2011 Dan Horák <dan[at]danny.cz> - 0.1.9-3
 - fix build on big endian arches
 
-* Fri Jun 24 2011 Fabian Affolter <fabian@bernewireless.net> - 0.1.9-2
+* Fri Jun 24 2011 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.9-2
 - Tests are failing, they are not active at the moment
 - Filtering added
 
-* Sat Mar 26 2011 Fabian Affolter <fabian@bernewireless.net> - 0.1.9-1
+* Sat Mar 26 2011 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.9-1
 - Initial package
