@@ -5,8 +5,8 @@
 %global srcname msgpack
 
 Name:           python-%{srcname}
-Version:        0.1.10
-Release:        2%{?dist}
+Version:        0.1.12
+Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 Group:          Development/Languages
@@ -64,6 +64,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 31 2012 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.12-1
+- Updated to new upstream version 0.1.12
+
 * Sat Jan 14 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.10-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
