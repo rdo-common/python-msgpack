@@ -5,7 +5,7 @@
 %global srcname msgpack
 
 Name:           python-%{srcname}
-Version:        0.1.12
+Version:        0.1.13
 Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
@@ -64,6 +64,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri May 11 2012 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.13-1
+- Updated to new upstream version 0.1.13
+
 * Tue Jan 31 2012 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.12-1
 - Updated to new upstream version 0.1.12
 
