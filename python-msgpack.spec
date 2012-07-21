@@ -6,7 +6,7 @@
 
 Name:           python-%{srcname}
 Version:        0.1.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 Group:          Development/Languages
@@ -64,6 +64,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jul 21 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.13-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Fri May 11 2012 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.13-1
 - Updated to new upstream version 0.1.13
 
