@@ -1,26 +1,20 @@
-%if ! (0%{?fedora} > 12 || 0%{?rhel} > 5)
-%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
-%endif
-
 %global srcname msgpack
 
 Name:           python-%{srcname}
-Version:        0.1.13
-Release:        5%{?dist}
+Version:        0.4.0
+Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
 URL:            http://pypi.python.org/pypi/msgpack-python/
 Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
-Patch0:         msgpack-python-0.1.9-endian.patch
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
-#BuildRequires:  python-nose
 
 # We don't want to provide private python extension libs
 %{?filter_setup:
-%filter_provides_in %{python_sitearch}/.*\.so$
+%filter_provides_in %{python2_sitearch}/.*\.so$
 %filter_setup
 }
 
@@ -31,7 +25,6 @@ This is a Python (de)serializer for MessagePack.
 
 %prep
 %setup -q -n %{srcname}-python-%{version}
-%patch0 -p1 -b .endian
 
 %build
 %{__python2} setup.py build
@@ -39,15 +32,15 @@ This is a Python (de)serializer for MessagePack.
 %install
 %{__python2} setup.py install --skip-build --root %{buildroot}
 
-##%check
-##PYTHONPATH="%{buildroot}%{python_sitearch}" nosetests -w test
-
 %files
-%doc COPYING
+%doc COPYING README.rst
 %{python2_sitearch}/%{srcname}/
 %{python2_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Tue Jan 07 2014 Fabian Affolter <mail@fabian-affolter.ch> - 0.4.0-1
+- Update to latest upstream version 0.4.0
+
 * Mon Jan 06 2014 Fabian Affolter <mail@fabian-affolter.ch> - 0.1.13-5
 - Update spec file and python macros
 
