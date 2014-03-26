@@ -1,7 +1,7 @@
 %global srcname msgpack
 
 Name:           python-%{srcname}
-Version:        0.4.1
+Version:        0.4.2
 Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
@@ -38,6 +38,9 @@ This is a Python (de)serializer for MessagePack.
 %{python2_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Wed Mar 26 2014 Fabian Affolter <mail@fabian-affolter.ch> - 0.4.2-1
+- Update to latest upstream version 0.4.2
+
 * Wed Feb 26 2014 Fabian Affolter <mail@fabian-affolter.ch> - 0.4.1-1
 - Update to latest upstream version 0.4.1
 
