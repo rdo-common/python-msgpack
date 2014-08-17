@@ -2,7 +2,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.2
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -38,6 +38,9 @@ This is a Python (de)serializer for MessagePack.
 %{python2_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
