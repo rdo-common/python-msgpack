@@ -1,8 +1,12 @@
 %global srcname msgpack
 
+%if 0%{?fedora}
+%global with_python3 1
+%endif
+
 Name:           python-%{srcname}
 Version:        0.4.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -15,6 +19,9 @@ BuildRequires:  python-setuptools
 # We don't want to provide private python extension libs
 %{?filter_setup:
 %filter_provides_in %{python2_sitearch}/.*\.so$
+%if 0%{?with_python3}
+%filter_provides_in %{python3_sitearch}/.*\.so$
+%endif
 %filter_setup
 }
 
@@ -23,21 +30,64 @@ MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python (de)serializer for MessagePack.
 
+%if 0%{?with_python3}
+%package -n python3-%{srcname}
+Summary:        Higher level Python Zookeeper client
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+
+%description -n python3-%{srcname}
+MessagePack is a binary-based efficient data interchange format that is
+focused on high performance. It is like JSON, but very fast and small.
+This is a Python (de)serializer for MessagePack.
+%endif
+
 %prep
 %setup -q -n %{srcname}-python-%{version}
+
+%if 0%{?with_python3}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
+%endif # with_python3
+
 
 %build
 %{__python2} setup.py build
 
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py build
+popd
+%endif
+
+
 %install
 %{__python2} setup.py install --skip-build --root %{buildroot}
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py install --skip-build --root %{buildroot}
+popd
+%endif
+
 
 %files
 %doc COPYING README.rst
 %{python2_sitearch}/%{srcname}/
 %{python2_sitearch}/%{srcname}*.egg-info
 
+%if 0%{?with_python3}
+%files -n python3-%{srcname}
+%doc COPYING README.rst
+%{python3_sitearch}/%{srcname}/
+%{python3_sitearch}/%{srcname}*.egg-info
+%endif
+
 %changelog
+* Wed Sep 10 2014 Nejc Saje <nsaje@redhat.com> - 0.4.2-4
+- Introduce python3- subpackage
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
