@@ -5,8 +5,8 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.4.2
-Release:        4%{?dist}
+Version:        0.4.4
+Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -15,6 +15,7 @@ Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{src
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
+BuildRequires:  pytest
 
 # We don't want to provide private python extension libs
 %{?filter_setup:
@@ -35,6 +36,7 @@ This is a Python (de)serializer for MessagePack.
 Summary:        Higher level Python Zookeeper client
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
+BuildRequires:  python3-pytest
 
 %description -n python3-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
@@ -71,6 +73,17 @@ pushd %{py3dir}
 popd
 %endif
 
+%check
+export PYTHONPATH=$(pwd)
+
+py.test-%{python_version} -v test
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+py.test-%{python3_version} -v test
+popd
+%endif # with_python3
+
 
 %files
 %doc COPYING README.rst
@@ -85,6 +98,10 @@ popd
 %endif
 
 %changelog
+* Thu Jan 15 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.4-1
+- Update to latest upstream version 0.4.4 (RHBZ #1180507)
+- Add tests in %%check
+
 * Wed Sep 10 2014 Nejc Saje <nsaje@redhat.com> - 0.4.2-4
 - Introduce python3- subpackage
 
