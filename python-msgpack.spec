@@ -4,14 +4,23 @@
 %global with_python3 1
 %endif
 
+%if 0%{?rhel} && 0%{?rhel} <= 6
+%{!?__python2: %global __python2 /usr/bin/python2}
+%{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
+%endif
+
 Name:           python-%{srcname}
 Version:        0.4.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
 URL:            http://pypi.python.org/pypi/msgpack-python/
 Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
+# Patch for older pytest on EL6 and EL7
+# https://github.com/msgpack/msgpack-python/pull/123
+Patch0:         python-msgpack-0.4.4-pytest23.patch
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
@@ -46,6 +55,10 @@ This is a Python (de)serializer for MessagePack.
 
 %prep
 %setup -q -n %{srcname}-python-%{version}
+
+# Patch for older pytest on EL6 and EL7
+# https://github.com/msgpack/msgpack-python/pull/123
+%patch0 -p1
 
 %if 0%{?with_python3}
 rm -rf %{py3dir}
@@ -98,6 +111,10 @@ popd
 %endif
 
 %changelog
+* Fri Jan 23 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.4-2
+- Patch test suite for EL6 and EL7 compatibility (RHBZ #1182808)
+- Add python2 macros for EL6 compatibility (RHBZ #1182808)
+
 * Thu Jan 15 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.4-1
 - Update to latest upstream version 0.4.4 (RHBZ #1180507)
 - Add tests in %%check

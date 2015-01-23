@@ -1,0 +1,29 @@
+From f40fdf523a545035d3f6ee36a31d50993feac14b Mon Sep 17 00:00:00 2001
+From: Ken Dreyer <kdreyer@redhat.com>
+Date: Fri, 23 Jan 2015 12:22:28 -0700
+Subject: [PATCH] tests: add pytest 2.3 compatibility
+
+Adjust the skipif conditional to use the older pytest 2.3 syntax.
+
+(This allows the tests to pass with the system pytest package on RHEL
+7.0, since RHEL 7.0 ships pytest 2.3.5.)
+---
+ test/test_unpack.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/test_unpack.py b/test/test_unpack.py
+index 8d0d949..c0d711c 100644
+--- a/test/test_unpack.py
++++ b/test/test_unpack.py
+@@ -16,7 +16,7 @@ def test_unpack_array_header_from_file():
+         unpacker.unpack()
+ 
+ 
+-@mark.skipif(not hasattr(sys, 'getrefcount'),
++@mark.skipif("not hasattr(sys, 'getrefcount') == True",
+              reason='sys.getrefcount() is needed to pass this test')
+ def test_unpacker_hook_refcnt():
+     result = []
+-- 
+1.9.3
+
