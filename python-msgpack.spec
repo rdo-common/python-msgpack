@@ -12,7 +12,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -39,7 +39,7 @@ This is a Python (de)serializer for MessagePack.
 
 %if 0%{?with_python3}
 %package -n python3-%{srcname}
-Summary:        Higher level Python Zookeeper client
+Summary:        A Python MessagePack (de)serializer
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 BuildRequires:  python3-pytest
@@ -104,6 +104,9 @@ popd
 %endif
 
 %changelog
+* Fri Jan 30 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.5-2
+- Correct python3 subpackage Summary
+
 * Sun Jan 25 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.5-1
 - Update to latest upstream version 0.4.5
 
