@@ -11,8 +11,8 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.4.5
-Release:        2%{?dist}
+Version:        0.4.6
+Release:        1%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -104,6 +104,9 @@ popd
 %endif
 
 %changelog
+* Fri Mar 13 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.6-1
+- Update to latest upstream version 0.4.6 (RHBZ #1201568)
+
 * Fri Jan 30 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.5-2
 - Correct python3 subpackage Summary
 
