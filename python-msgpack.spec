@@ -12,7 +12,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -104,6 +104,9 @@ popd
 %endif
 
 %changelog
+* Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.4.6-2
+- Rebuilt for GCC 5 C++11 ABI change
+
 * Fri Mar 13 2015 Ken Dreyer <ktdreyer@ktdreyer.com> - 0.4.6-1
 - Update to latest upstream version 0.4.6 (RHBZ #1201568)
 
