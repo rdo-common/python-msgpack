@@ -12,7 +12,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.6
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -104,6 +104,9 @@ popd
 %endif
 
 %changelog
+* Fri Nov 06 2015 Robert Kuska <rkuska@redhat.com> - 0.4.6-4
+- Rebuilt for Python3.5 rebuild
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.6-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
