@@ -12,7 +12,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        A Python MessagePack (de)serializer
 
 License:        ASL 2.0
@@ -22,6 +22,7 @@ Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{src
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  pytest
+Provides:       python2-%{srcname} = %{version}-%{release}
 
 # We don't want to provide private python extension libs
 %{?filter_setup:
@@ -53,20 +54,12 @@ This is a Python (de)serializer for MessagePack.
 %prep
 %setup -q -n %{srcname}-python-%{version}
 
-%if 0%{?with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-find %{py3dir} -name '*.py' | xargs sed -i '1s|^#!python|#!%{__python3}|'
-%endif # with_python3
-
 
 %build
 %{__python2} setup.py build
 
 %if 0%{?with_python3}
-pushd %{py3dir}
 %{__python3} setup.py build
-popd
 %endif
 
 
@@ -74,9 +67,7 @@ popd
 %{__python2} setup.py install --skip-build --root %{buildroot}
 
 %if 0%{?with_python3}
-pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
-popd
 %endif
 
 %check
@@ -85,9 +76,7 @@ export PYTHONPATH=$(pwd)
 py.test-%{python_version} -v test
 
 %if 0%{?with_python3}
-pushd %{py3dir}
 py.test-%{python3_version} -v test
-popd
 %endif # with_python3
 
 
@@ -104,6 +93,10 @@ popd
 %endif
 
 %changelog
+* Wed Dec 30 2015 Orion Poplawski <orion@cora.nwra.com> - 0.4.6-5
+- Drop py3dir
+- Provide python2-msgpack
+
 * Fri Nov 06 2015 Robert Kuska <rkuska@redhat.com> - 0.4.6-4
 - Rebuilt for Python3.5 rebuild
 
