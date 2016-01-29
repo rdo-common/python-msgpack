@@ -1,19 +1,12 @@
 %global srcname msgpack
-
-%if 0%{?fedora}
-%global with_python3 1
-%endif
-
-%if 0%{?rhel} && 0%{?rhel} <= 6
-%{!?__python2: %global __python2 /usr/bin/python2}
-%{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
-%endif
+%global sum A Python MessagePack (de)serializer
+%global __provides_exclude_from ^(%{python2_sitearch}/.*\\.so)$
+%global __provides_exclude_from ^(%{python3_sitearch}/.*\\.so)$
 
 Name:           python-%{srcname}
-Version:        0.4.6
-Release:        5%{?dist}
-Summary:        A Python MessagePack (de)serializer
+Version:        0.4.7
+Release:        1%{?dist}
+Summary:        %{sum}
 
 License:        ASL 2.0
 URL:            http://pypi.python.org/pypi/msgpack-python/
@@ -22,53 +15,43 @@ Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{src
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  pytest
-Provides:       python2-%{srcname} = %{version}-%{release}
-
-# We don't want to provide private python extension libs
-%{?filter_setup:
-%filter_provides_in %{python2_sitearch}/.*\.so$
-%if 0%{?with_python3}
-%filter_provides_in %{python3_sitearch}/.*\.so$
-%endif
-%filter_setup
-}
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-pytest
 
 %description
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python (de)serializer for MessagePack.
 
-%if 0%{?with_python3}
+%package -n python2-%{srcname}
+Summary:        %{sum}
+%{?python_provide:%python_provide python2-%{srcname}}
+
+%description -n python2-%{srcname}
+MessagePack is a binary-based efficient data interchange format that is
+focused on high performance. It is like JSON, but very fast and small.
+This is a Python (de)serializer for MessagePack.
+
 %package -n python3-%{srcname}
-Summary:        A Python MessagePack (de)serializer
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-pytest
+Summary:        %{sum}
+%{?python_provide:%python_provide python3-%{srcname}}
 
 %description -n python3-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python (de)serializer for MessagePack.
-%endif
 
 %prep
-%setup -q -n %{srcname}-python-%{version}
-
+%autosetup -n %{srcname}-python-%{version}
 
 %build
-%{__python2} setup.py build
-
-%if 0%{?with_python3}
-%{__python3} setup.py build
-%endif
-
+%py2_build
+%py3_build
 
 %install
-%{__python2} setup.py install --skip-build --root %{buildroot}
-
-%if 0%{?with_python3}
-%{__python3} setup.py install --skip-build --root %{buildroot}
-%endif
+%py2_install
+%py3_install
 
 %check
 export PYTHONPATH=$(pwd)
@@ -79,20 +62,23 @@ py.test-%{python_version} -v test
 py.test-%{python3_version} -v test
 %endif # with_python3
 
-
-%files
-%doc COPYING README.rst
+%files -n python2-%{srcname}
+%doc README.rst
+%license COPYING
 %{python2_sitearch}/%{srcname}/
 %{python2_sitearch}/%{srcname}*.egg-info
 
-%if 0%{?with_python3}
 %files -n python3-%{srcname}
-%doc COPYING README.rst
+%doc README.rst
+%license COPYING
 %{python3_sitearch}/%{srcname}/
 %{python3_sitearch}/%{srcname}*.egg-info
-%endif
 
 %changelog
+* Fri Jan 29 2016 Fabian Affolter <mail@fabian-affolter.ch> - 0.4.7-1
+- Upadte spec file
+- Update to latest upstream version 0.4.7
+
 * Wed Dec 30 2015 Orion Poplawski <orion@cora.nwra.com> - 0.4.6-5
 - Drop py3dir
 - Provide python2-msgpack
