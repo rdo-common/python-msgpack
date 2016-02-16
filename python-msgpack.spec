@@ -3,9 +3,12 @@
 %global __provides_exclude_from ^(%{python2_sitearch}/.*\\.so)$
 %global __provides_exclude_from ^(%{python3_sitearch}/.*\\.so)$
 
+# For old Fedora versions
+%{!?python3_pkgversion:%global python3_pkgversion 3}
+
 Name:           python-%{srcname}
 Version:        0.4.7
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -15,9 +18,9 @@ Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{src
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  pytest
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-pytest
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-pytest
 
 %description
 MessagePack is a binary-based efficient data interchange format that is
@@ -33,14 +36,14 @@ MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python (de)serializer for MessagePack.
 
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{sum}
-%{?python_provide:%python_provide python3-%{srcname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
 
-%description -n python3-%{srcname}
+%description -n python%{python3_pkgversion}-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
-This is a Python (de)serializer for MessagePack.
+This is a Python %{python3_version} (de)serializer for MessagePack.
 
 %prep
 %autosetup -n %{srcname}-python-%{version}
@@ -57,10 +60,7 @@ This is a Python (de)serializer for MessagePack.
 export PYTHONPATH=$(pwd)
 
 py.test-%{python_version} -v test
-
-%if 0%{?with_python3}
 py.test-%{python3_version} -v test
-%endif # with_python3
 
 %files -n python2-%{srcname}
 %doc README.rst
@@ -68,13 +68,16 @@ py.test-%{python3_version} -v test
 %{python2_sitearch}/%{srcname}/
 %{python2_sitearch}/%{srcname}*.egg-info
 
-%files -n python3-%{srcname}
+%files -n python%{python3_pkgversion}-%{srcname}
 %doc README.rst
 %license COPYING
 %{python3_sitearch}/%{srcname}/
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Tue Feb 16 2016 Denis Fateyev <denis@fateyev.com> - 0.4.7-3
+- Added EPEL compatibility (RHBZ #1290393)
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
