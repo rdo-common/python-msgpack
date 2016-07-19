@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.7
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.7-4
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Tue Feb 16 2016 Denis Fateyev <denis@fateyev.com> - 0.4.7-3
 - Added EPEL compatibility (RHBZ #1290393)
 
