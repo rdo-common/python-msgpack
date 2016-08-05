@@ -7,13 +7,13 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name:           python-%{srcname}
-Version:        0.4.7
-Release:        4%{?dist}
+Version:        0.4.8
+Release:        1%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
-URL:            http://pypi.python.org/pypi/msgpack-python/
-Source0:        http://pypi.python.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
+URL:            https://pypi.python.org/pypi/msgpack-python/
+Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
 
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Fri Aug 05 2016 Denis Fateyev <denis@fateyev.com> - 0.4.8-1
+- Update to 0.4.8 version
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.4.7-4
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
@@ -85,7 +88,7 @@ py.test-%{python3_version} -v test
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
 * Fri Jan 29 2016 Fabian Affolter <mail@fabian-affolter.ch> - 0.4.7-1
-- Upadte spec file
+- Update spec file
 - Update to latest upstream version 0.4.7
 
 * Wed Dec 30 2015 Orion Poplawski <orion@cora.nwra.com> - 0.4.6-5
