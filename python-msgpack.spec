@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.4.8-2
+- Rebuild for Python 3.6
+
 * Fri Aug 05 2016 Denis Fateyev <denis@fateyev.com> - 0.4.8-1
 - Update to 0.4.8 version
 
