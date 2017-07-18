@@ -1,10 +1,16 @@
 %global srcname msgpack
 %global sum A Python MessagePack (de)serializer
-%global __provides_exclude_from ^(%{python2_sitearch}/.*\\.so)$
-%global __provides_exclude_from ^(%{python3_sitearch}/.*\\.so)$
 
+%if 0%{?fedora} || 0%{?epel}
+%global with_python3 1
+%endif
+
+%global __provides_exclude_from ^(%{python2_sitearch}/.*\\.so)$
+%if 0%{?with_python3}
+%global __provides_exclude_from ^(%{python3_sitearch}/.*\\.so)$
 # For old Fedora versions
 %{!?python3_pkgversion:%global python3_pkgversion 3}
+%endif
 
 Name:           python-%{srcname}
 Version:        0.5.6
@@ -20,10 +26,6 @@ BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-pytest
 BuildRequires:  python2-funcsigs
-BuildRequires:  python%{python3_pkgversion}-devel
-BuildRequires:  python%{python3_pkgversion}-setuptools
-BuildRequires:  python%{python3_pkgversion}-pytest
-BuildRequires:  python%{python3_pkgversion}-funcsigs
 
 %description
 MessagePack is a binary-based efficient data interchange format that is
@@ -39,31 +41,43 @@ MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python (de)serializer for MessagePack.
 
+%if 0%{?with_python3}
 %package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{sum}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{srcname}}
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-funcsigs
 
 %description -n python%{python3_pkgversion}-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
 This is a Python %{python3_version} (de)serializer for MessagePack.
+%endif
 
 %prep
 %autosetup -n %{srcname}-python-%{version}
 
 %build
 %py2_build
+%if 0%{?with_python3}
 %py3_build
+%endif
 
 %install
 %py2_install
+%if 0%{?with_python3}
 %py3_install
+%endif
 
 # Test don't pass at the moment. Missing dependency in pytest.
 #%check
 #export PYTHONPATH=$(pwd)
 #py.test-%{python_version} -v test
+#%if 0%{?with_python3}
 #py.test-%{python3_version} -v test
+#%endif
 
 %files -n python2-%{srcname}
 %doc README.rst
@@ -71,11 +85,13 @@ This is a Python %{python3_version} (de)serializer for MessagePack.
 %{python2_sitearch}/%{srcname}/
 %{python2_sitearch}/%{srcname}*.egg-info
 
+%if 0%{?with_python3}
 %files -n python%{python3_pkgversion}-%{srcname}
 %doc README.rst
 %license COPYING
 %{python3_sitearch}/%{srcname}/
 %{python3_sitearch}/%{srcname}*.egg-info
+%endif
 
 %changelog
 * Thu Mar 15 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.5.6-1
