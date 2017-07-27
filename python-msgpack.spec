@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.4.8
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.8-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.8-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
