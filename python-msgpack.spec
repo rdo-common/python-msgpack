@@ -7,8 +7,8 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name:           python-%{srcname}
-Version:        0.4.8
-Release:        5%{?dist}
+Version:        0.5.1
+Release:        1%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Sat Jan 20 2018 Denis Fateyev <denis@fateyev.com> - 0.5.1-1
+- Update to 0.5.1 version
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.8-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
