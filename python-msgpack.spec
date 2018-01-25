@@ -8,7 +8,7 @@
 
 Name:           python-%{srcname}
 Version:        0.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -16,8 +16,8 @@ URL:            https://pypi.python.org/pypi/msgpack-python/
 Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
 
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
-BuildRequires:  pytest
+BuildRequires:  python2-setuptools
+BuildRequires:  python2-pytest
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-pytest
@@ -75,6 +75,10 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Thu Jan 25 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.5.1-2
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Sat Jan 20 2018 Denis Fateyev <denis@fateyev.com> - 0.5.1-1
 - Update to 0.5.1 version
 
