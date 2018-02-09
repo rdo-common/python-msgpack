@@ -7,8 +7,8 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name:           python-%{srcname}
-Version:        0.5.1
-Release:        3%{?dist}
+Version:        0.5.4
+Release:        1%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -75,6 +75,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Fri Feb 09 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.5.4-1
+- Update to latest upstream release 0.5.4 (rhbz#1541377)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
