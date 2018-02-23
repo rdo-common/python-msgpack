@@ -7,7 +7,7 @@
 %{!?python3_pkgversion:%global python3_pkgversion 3}
 
 Name:           python-%{srcname}
-Version:        0.5.4
+Version:        0.5.5
 Release:        1%{?dist}
 Summary:        %{sum}
 
@@ -76,6 +76,9 @@ py.test-%{python3_version} -v test
 %{python3_sitearch}/%{srcname}*.egg-info
 
 %changelog
+* Fri Feb 23 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.5.5-1
+- Update to latest upstream release 0.5.5 (rhbz#1548215)
+
 * Fri Feb 09 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.5.4-1
 - Update to latest upstream release 0.5.4 (rhbz#1541377)
 
