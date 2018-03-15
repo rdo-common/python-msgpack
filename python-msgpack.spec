@@ -19,9 +19,11 @@ BuildRequires:  Cython
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-pytest
+BuildRequires:  python2-funcsigs
 BuildRequires:  python%{python3_pkgversion}-devel
 BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-funcsigs
 
 %description
 MessagePack is a binary-based efficient data interchange format that is
