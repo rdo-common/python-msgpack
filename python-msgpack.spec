@@ -14,7 +14,7 @@
 
 Name:           python-%{srcname}
 Version:        0.5.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -94,6 +94,9 @@ This is a Python %{python3_version} (de)serializer for MessagePack.
 %endif
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.6-2
+- Rebuilt for Python 3.7
+
 * Thu Mar 15 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.5.6-1
 - Update to latest upstream release 0.5.6 (rhbz#1548215)
 
