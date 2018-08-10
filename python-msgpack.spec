@@ -62,13 +62,12 @@ This is a Python %{python3_version} (de)serializer for MessagePack.
 %py3_install
 %endif
 
-# Test don't pass at the moment. Missing dependency in pytest.
-#%check
-#export PYTHONPATH=$(pwd)
-#py.test-%{python_version} -v test
-#%if 0%{?with_python3}
-#py.test-%{python3_version} -v test
-#%endif
+%check
+export PYTHONPATH=$(pwd)
+py.test-2 -v test
+%if 0%{?with_python3}
+py.test-%{python3_version} -v test
+%endif
 
 %files -n python2-%{srcname}
 %doc README.rst
