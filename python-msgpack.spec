@@ -14,14 +14,14 @@
 
 Name:           python-%{srcname}
 Version:        0.5.6
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/msgpack-python/
 Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
 
-BuildRequires:  gcc
+BuildRequires:  gcc-c++
 BuildRequires:  Cython
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
@@ -95,6 +95,9 @@ This is a Python %{python3_version} (de)serializer for MessagePack.
 %endif
 
 %changelog
+* Fri Aug 10 2018 Felix Schwarz <fschwarz@fedoraproject.org> - 0.5.6-4
+- require gcc-c++, avoid FTBFS in rawhide (#1605779)
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.6-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
