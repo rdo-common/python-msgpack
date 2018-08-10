@@ -1,15 +1,5 @@
-%global srcname msgpack
-%global sum A Python MessagePack (de)serializer
-
 %if 0%{?fedora} || 0%{?epel}
 %global with_python3 1
-%endif
-
-%global __provides_exclude_from ^(%{python2_sitearch}/.*\\.so)$
-%if 0%{?with_python3}
-%global __provides_exclude_from ^(%{python3_sitearch}/.*\\.so)$
-# For old Fedora versions
-%{!?python3_pkgversion:%global python3_pkgversion 3}
 %endif
 
 Name:           python-%{srcname}
