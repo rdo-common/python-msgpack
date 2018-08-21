@@ -8,7 +8,7 @@ Release:        4%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
-URL:            https://pypi.python.org/pypi/msgpack-python/
+URL:            https://msgpack.org/
 Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
 
 BuildRequires:  gcc-c++
