@@ -4,12 +4,12 @@
 
 Name:           python-%{srcname}
 Version:        0.5.6
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
 URL:            https://msgpack.org/
-Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}-python/%{srcname}-python-%{version}.tar.gz
+Source0:        %pypi_source
 
 BuildRequires:  gcc-c++
 BuildRequires:  Cython
@@ -27,6 +27,10 @@ This is a Python (de)serializer for MessagePack.
 Summary:        %{sum}
 %{?python_provide:%python_provide python2-%{srcname}}
 
+# For backwards compatibility
+Provides:       python2dist(%{srcname}-python) = %{version}
+Provides:       python%{python2_version}dist(%{srcname}-python) = %{version}
+
 %description -n python2-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
@@ -41,6 +45,10 @@ BuildRequires:  python%{python3_pkgversion}-setuptools
 BuildRequires:  python%{python3_pkgversion}-pytest
 BuildRequires:  python%{python3_pkgversion}-funcsigs
 
+# For backwards compatibility
+Provides:       python3dist(%{srcname}-python) = %{version}
+Provides:       python%{python3_version}dist(%{srcname}-python) = %{version}
+
 %description -n python%{python3_pkgversion}-%{srcname}
 MessagePack is a binary-based efficient data interchange format that is
 focused on high performance. It is like JSON, but very fast and small.
@@ -48,7 +56,7 @@ This is a Python %{python3_version} (de)serializer for MessagePack.
 %endif
 
 %prep
-%autosetup -n %{srcname}-python-%{version}
+%autosetup -n %{srcname}-%{version}
 
 %build
 %py2_build
@@ -84,6 +92,9 @@ py.test-%{python3_version} -v test
 %endif
 
 %changelog
+* Mon Sep 03 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.6-5
+- Use msgpack from PyPI, not msgpack-python (deprecated)
+
 * Fri Aug 10 2018 Felix Schwarz <fschwarz@fedoraproject.org> - 0.5.6-4
 - require gcc-c++, avoid FTBFS in rawhide (#1605779)
 
