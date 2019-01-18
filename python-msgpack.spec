@@ -92,7 +92,7 @@ py.test-%{python3_version} -v test
 %endif
 
 %changelog
-* Fri Jan 18 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.6.0-1
+* Fri Jan 18 2019 Fabian Affolter <mail@fabian-affolter.ch> - 0.6.0-1
 - Update to latest upstream release 0.6.0
 
 * Mon Sep 03 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.6-5
