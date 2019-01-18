@@ -3,8 +3,8 @@
 %endif
 
 Name:           python-%{srcname}
-Version:        0.5.6
-Release:        5%{?dist}
+Version:        0.6.0
+Release:        1%{?dist}
 Summary:        %{sum}
 
 License:        ASL 2.0
@@ -92,11 +92,14 @@ py.test-%{python3_version} -v test
 %endif
 
 %changelog
+* Fri Jan 18 2018 Fabian Affolter <mail@fabian-affolter.ch> - 0.6.0-1
+- Update to latest upstream release 0.6.0
+
 * Mon Sep 03 2018 Miro Hrončok <mhroncok@redhat.com> - 0.5.6-5
 - Use msgpack from PyPI, not msgpack-python (deprecated)
 
 * Fri Aug 10 2018 Felix Schwarz <fschwarz@fedoraproject.org> - 0.5.6-4
-- require gcc-c++, avoid FTBFS in rawhide (#1605779)
+- Require gcc-c++, avoid FTBFS in rawhide (#1605779)
 
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.6-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
