@@ -2,6 +2,9 @@
 %global with_python3 1
 %endif
 
+%global srcname msgpack
+%global sum A Python MessagePack (de)serializer
+
 Name:           python-%{srcname}
 Version:        0.6.1
 Release:        2%{?dist}
@@ -9,7 +12,7 @@ Summary:        %{sum}
 
 License:        ASL 2.0
 URL:            https://msgpack.org/
-Source0:        %pypi_source
+Source0:        https://files.pythonhosted.org/packages/source/m/%{srcname}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  gcc-c++
 BuildRequires:  Cython
